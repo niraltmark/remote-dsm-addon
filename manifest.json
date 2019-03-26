@@ -1,0 +1,17 @@
+{
+  "name": "Remote DSM Extension",
+  "version": "1.0",
+  "description": "Open a hangouts meeting for DSM",
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "manifest_version": 2
+}
