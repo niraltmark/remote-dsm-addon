@@ -5,24 +5,14 @@
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function () {
-  chrome.storage.sync.set({
-    color: '#3aa757'
-  }, function () {
-    console.log("The color is green.");
-  });
-
-  chrome.alarms.clear("remote-dsm");
-
   chrome.alarms.create("remote-dsm", {
-    when: Date.now() + 1000
-
-    // when: new Date('3/22/2019 23:45:00').getTime()
+    when: new Date('3/27/2019 10:28:00').getTime()
   });
 });
 
 chrome.alarms.onAlarm.addListener(function (alarm) {
   chrome.windows.create({
-    url: 'https://meet.google.com/seq-zjvw-nvs'
+    url: 'https://meet.google.com/okq-fhzh-khm'
   }, function (window) {
     chrome.tabs.getSelected(null, function (tab) {
       chrome.tabs.executeScript(tab.id, {
@@ -30,8 +20,14 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
       });
     });
   });
+  
+  chrome.alarms.clear("remote-dsm", function() {
+    let now = new Date(Date.now());
+    let meetingDateAndTime = new Date(now.getFullYear(), now.getMonth(), now.getDay(), 10, 28);
+    let nextMeetingDateAndTime = new Date(meetingDateAndTime.getDate() + 1);
 
-  // Remove the alarm and set it to another time?
-
-  // Now lets open a window of hangouts
+    chrome.alarms.create("remote-dsm", {
+      when: nextMeetingDateAndTime.getTime()
+    });
+  });
 });
